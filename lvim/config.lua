@@ -8,6 +8,10 @@ lvim.keys.normal_mode["C-i"] = nil
 lvim.keys.normal_mode["<C-i>"] = "<C-w>k"
 lvim.keys.normal_mode["<C-j>"] = "<C-w>h"
 lvim.keys.normal_mode["<C-k>"] = "<C-w>j"
+lvim.keys.visual_mode["i"] = "k"
+lvim.keys.visual_mode["k"] = "j"
+lvim.keys.visual_mode["j"] = "h"
+lvim.keys.visual_mode["h"] = "i"
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Terminal",
   f = { "<cmd>ToggleTerm<cr>", "Floating terminal" },
@@ -38,6 +42,8 @@ vim.cmd [[
    autocmd VimEnter * NvimTreeOpen
  augroup END
 ]]
+
+
 local dap = require('dap')
 dap.adapters.cppdbg = {
   id = 'cppdbg',
@@ -51,7 +57,7 @@ dap.configurations.cpp = {
  type = "cppdbg",
  name = "Launch file",
  request = "launch",
- program = "${file}",
+ program = "${fileBasenameNoExtension}",
  cwd = vim.fn.getcwd(),
  externalConsole = false,
  MIMode = "gdb",
@@ -97,5 +103,4 @@ dap.configurations.c = {
  },
  },
 }
-
 
